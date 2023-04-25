@@ -1,3 +1,5 @@
+package zadanie2_walec;
+
 import java.util.Scanner;
 public class Main {
 

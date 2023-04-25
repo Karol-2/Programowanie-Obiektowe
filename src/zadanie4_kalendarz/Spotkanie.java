@@ -1,3 +1,5 @@
+package zadanie4_kalendarz;
+
 import java.time.LocalTime;
 
 public class Spotkanie {
@@ -6,7 +8,7 @@ public class Spotkanie {
     private LocalTime poczatek;
     private LocalTime koniec;
 
-    public static LocalTime najwczesniejszaGodzina = LocalTime.of(7,0);
+    public static final LocalTime NAJWCZESNIEJSZA_GODZINA = LocalTime.of(7,0);
 
     public Spotkanie(String opis,String priorytet, LocalTime poczatek, LocalTime koniec){
         this.opis = opis;
@@ -27,6 +29,6 @@ public class Spotkanie {
         return this.koniec;
     }
 
-
+    //to string czy cos
 
 }

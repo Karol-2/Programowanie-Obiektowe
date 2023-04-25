@@ -1,3 +1,5 @@
+import zadanie2_walec.Walec;
+
 import java.util.Scanner;
 
 public class Playground {
@@ -19,9 +21,9 @@ public class Playground {
 
         while (dzialanie) {
             System.out.println("\nWybierz opcję:");
-            System.out.println("1. Wyświetl wartości zmiennych instancji obiektu klasy Walec");
-            System.out.println("2. Zmień wartości zmiennych instancji obiektu klasy Walec");
-            System.out.println("3. Wylicz i wyświetl pole powierzchni i objętość obiektu klasy Walec");
+            System.out.println("1. Wyświetl wartości zmiennych instancji obiektu klasy zadanie2_walec.Walec");
+            System.out.println("2. Zmień wartości zmiennych instancji obiektu klasy zadanie2_walec.Walec");
+            System.out.println("3. Wylicz i wyświetl pole powierzchni i objętość obiektu klasy zadanie2_walec.Walec");
             System.out.println("4. Wyjdź z programu");
 
             wybor = input.nextInt();

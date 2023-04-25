@@ -1,3 +1,5 @@
+package zadanie3_oceny;
+
 import java.util.Scanner;
 
 public class Zad3 {

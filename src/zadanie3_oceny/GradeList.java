@@ -1,3 +1,5 @@
+package zadanie3_oceny;
+
 import java.util.ArrayList;
 public class GradeList {
     private ArrayList<Double> lista = new ArrayList<>();

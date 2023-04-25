@@ -1,4 +1,4 @@
-package lab01;
+package zadanie1_silnia;
 
 import java.util.Scanner;
 

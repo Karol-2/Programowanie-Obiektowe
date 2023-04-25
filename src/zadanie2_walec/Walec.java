@@ -1,3 +1,5 @@
+package zadanie2_walec;
+
 public class Walec {
 
     private double wysokosc;
