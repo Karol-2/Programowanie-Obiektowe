@@ -1,4 +1,4 @@
-package kalendarz_v2;
+package zadanie_5_kalendarz2;
 
 import java.time.LocalTime;
 
@@ -29,12 +29,13 @@ public class Spotkanie {
         return this.koniec;
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\tOpis: ").append(dajOpis()).append('\n');
-        sb.append("\tPriorytet: ").append(dajPriorytet()).append('\n');
-        sb.append("\tPoczatek: ").append(dajPoczatekSpotkania()).append('\n');
-        sb.append("\tKoniec: ").append(dajKoniecSpotkania());
+        sb.append("\tOpis: ").append(this.opis).append('\n');
+        sb.append("\tPriorytet: ").append(this.priorytet).append('\n');
+        sb.append("\tPoczatek: ").append(this.poczatek).append('\n');
+        sb.append("\tKoniec: ").append(this.koniec);
         return sb.toString();
     }
 

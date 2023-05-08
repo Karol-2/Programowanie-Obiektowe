@@ -1,10 +1,10 @@
-package kalendarz_v2;
+package zadanie_5_kalendarz2;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Zadanie4 {
+public class Zadanie5 {
 
     public static void main(String[] args) {
         System.out.println("Ten program służy obliczaniu do obsługi kalendarza spotkań w danym tygodniu");
@@ -25,7 +25,10 @@ public class Zadanie4 {
                 case 2 -> usuwanie(kalendarz);
                 case 3 -> spotkaniaDnia(kalendarz);
                 case 4 -> spotkaniaPriorytet(kalendarz);
-                case 5 -> dzialanieProgramu = false;
+                case 5 -> spotkaniaOdPodanegoCzasu(kalendarz);
+                case 6 -> spotkaniaPrzedzialCzasu(kalendarz);
+                case 7 -> spotkaniaPriorytetZCzasem(kalendarz);
+                case 8 -> dzialanieProgramu = false;
                 default -> System.out.println("Zła wartość!");
             }
         }
@@ -59,7 +62,7 @@ public class Zadanie4 {
         Scanner scan = new Scanner(System.in);
         System.out.print("Podaj numer dnia: ");
         int dzien = scan.nextInt();
-        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien);
+        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,(s)-> true);
         wyswietlSpotkania(spotkania);
         System.out.print("Podaj numer spotkania do usuniecia: ");
         int numerSpotkania = scan.nextInt();
@@ -71,7 +74,7 @@ public class Zadanie4 {
         Scanner scan = new Scanner(System.in);
         System.out.print("Podaj numer dnia: ");
         int dzien = scan.nextInt();
-        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien);
+        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,(s)-> true);
         wyswietlSpotkania(spotkania);
 
     }
@@ -82,10 +85,52 @@ public class Zadanie4 {
         scan.nextLine();
         System.out.print("Podaj priorytet: ");
         String priorytet = scan.nextLine();
-        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,priorytet);
+        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,(s)->(s.dajPriorytet()).equals(priorytet));
         wyswietlSpotkania(spotkania);
 
     }
+    private static void spotkaniaOdPodanegoCzasu(Kalendarz kalendarz){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Podaj numer dnia: ");
+        int dzien = scan.nextInt();
+        scan.nextLine();
+        System.out.print("Podaj godzinę od której pokazać spotkania: ");
+        String godzina = scan.nextLine();
+        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,(s)->
+                (s.dajPoczatekSpotkania().isAfter(LocalTime.parse(godzina).minusMinutes(1))));
+        wyswietlSpotkania(spotkania);
+    }
+
+    private static void spotkaniaPrzedzialCzasu(Kalendarz kalendarz){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Podaj numer dnia: ");
+        int dzien = scan.nextInt();
+        scan.nextLine();
+        System.out.print("Podaj godzinę od której pokazać spotkania: ");
+        String godzinaStart = scan.nextLine();
+        System.out.print("Podaj godzinę do której pokazać spotkania: ");
+        String godzinaKoniec = scan.nextLine();
+        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,(s)->
+                s.dajPoczatekSpotkania().isAfter(LocalTime.parse(godzinaStart).minusMinutes(1)) &&
+                s.dajPoczatekSpotkania().isBefore(LocalTime.parse(godzinaKoniec).plusMinutes(1)));
+        wyswietlSpotkania(spotkania);
+    }
+
+    private static void spotkaniaPriorytetZCzasem(Kalendarz kalendarz){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Podaj numer dnia: ");
+        int dzien = scan.nextInt();
+        scan.nextLine();
+        System.out.print("Podaj godzinę od której pokazać spotkania: ");
+        String godzina = scan.nextLine();
+        System.out.print("Podaj priorytet: ");
+        String priorytet = scan.nextLine();
+        ArrayList<Spotkanie> spotkania = kalendarz.pobierzSpotkania(dzien,(s)->
+                s.dajPoczatekSpotkania().isAfter(LocalTime.parse(godzina).minusMinutes(1))
+                        && s.dajPriorytet().equals(priorytet));
+        wyswietlSpotkania(spotkania);
+    }
+
     private static void wyswietlSpotkania(ArrayList<Spotkanie> spotkania){
         System.out.println("Znalezione spotkania: ");
         for (int i=0;i<spotkania.size();i++){
@@ -101,7 +146,10 @@ public class Zadanie4 {
         System.out.println("2. Usunięcie wybranego spotkania w dany dzień");
         System.out.println("3. Wyświetlenie wszystkich spotkań danego dnia");
         System.out.println("4. Wyświetlenie wszystkich spotkań danego dnia o danym priorytecie");
-        System.out.println("5. Wyjście");
+        System.out.println("5. Wyświetlenie wszystkich spotkań danego dnia od podanego czasu");
+        System.out.println("6. Wyświetlenie wszystkich spotkań danego dnia pomiędzy podanymi czasami");
+        System.out.println("7. Wyświetlenie wszystkich spotkań danego dnia o wybranym priorytecie i od podanego czasu");
+        System.out.println("8. Wyjście");
         System.out.println("=====================================================================");
     }
 }

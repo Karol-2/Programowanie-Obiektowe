@@ -1,7 +1,8 @@
-package kalendarz_v2;
+package zadanie_5_kalendarz2;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.function.*;
 
 public class Kalendarz {
 
@@ -25,20 +26,17 @@ public class Kalendarz {
     public void usunSpotkanie(int dzien, int numerSpotkania){
         kalendarz[dzien].remove(numerSpotkania);
     }
-    public ArrayList<Spotkanie> pobierzSpotkania(int dzien) {
-        return kalendarz[dzien];
-    }
-    public ArrayList<Spotkanie> pobierzSpotkania(int dzien, String priorytet) {
-       ArrayList<Spotkanie> spotkaniaPriorytetowe = new ArrayList<>();
+    public ArrayList<Spotkanie> pobierzSpotkania(int dzien, Predicate<Spotkanie> checker) {
+       ArrayList<Spotkanie> spotkaniaWybrane = new ArrayList<>();
        for (int i=0;i<kalendarz[dzien].size();i++)
        {
            Spotkanie spotkanie = kalendarz[dzien].get(i);
-           if(priorytet.equals(spotkanie.dajPriorytet())){
-               spotkaniaPriorytetowe.add(spotkanie);
+           if(checker.test(spotkanie)){
+               spotkaniaWybrane.add(spotkanie);
            }
        }
 
-        return spotkaniaPriorytetowe;
+        return spotkaniaWybrane;
     }
 
 
