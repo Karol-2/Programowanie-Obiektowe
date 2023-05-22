@@ -1,4 +1,4 @@
-package zadanie_6;
+package zadanie6KalendarzSpotkaniaZadania;
 
 import java.time.LocalTime;
 
