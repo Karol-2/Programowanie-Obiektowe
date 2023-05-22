@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 public class Kalendarz {
 
+
     private ArrayList<Element>[] kalendarz;
     public Kalendarz(){
         this(7);

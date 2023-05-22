@@ -95,7 +95,20 @@ public class Zadanie6 {
         wyswietlWszystkie(spotkania);
         System.out.print("Podaj numer spotkania do usuniecia: ");
         int numerSpotkania = scan.nextInt();
-        kalendarz.usunWydarzenie(dzien,numerSpotkania);
+        int aktualneSpotkanie = 0;
+        ArrayList<Element> wszystkieWydarzenia = kalendarz.pobierzWydarzenia(dzien,(s)-> true);
+
+        for (int i = 0; i < wszystkieWydarzenia.size(); i++){
+            if (wszystkieWydarzenia.get(i) instanceof Spotkanie) {
+
+                if (aktualneSpotkanie == numerSpotkania) {
+                    kalendarz.usunWydarzenie(dzien,i);
+                    System.out.println("Spotkanie zostało usunięte.");
+                    break;
+                }
+                aktualneSpotkanie++;
+            }
+        }
 
     }
     private static void usuwanieZadania(Kalendarz kalendarz){
@@ -104,22 +117,23 @@ public class Zadanie6 {
         int dzien = scan.nextInt();
         ArrayList<Element> wydarzenia = kalendarz.pobierzWydarzenia(dzien,(s)-> s instanceof Zadanie);
         wyswietlWszystkie(wydarzenia);
-        System.out.print("Podaj numer spotkania do usuniecia: ");
+        System.out.print("Podaj numer zadania do usuniecia: ");
         int numerZadania = scan.nextInt();
-        for (int i = 0; i < wydarzenia.size(); i++) {
-            Element element = wydarzenia.get(i);
-            if (element instanceof Zadanie && ((Zadanie) element).getNumer() == numerZadania) {
-                kalendarz.usunWydarzenie(dzien,i);
-                System.out.println("Zadanie zostało usunięte.");
-                break;
+        int aktualneZadanie = 0;
+        ArrayList<Element> wszystkieWydarzenia = kalendarz.pobierzWydarzenia(dzien,(s)-> true);
+
+        for (int i = 0; i < wszystkieWydarzenia.size(); i++){
+            if (wszystkieWydarzenia.get(i) instanceof Zadanie) {
+
+                if (aktualneZadanie == numerZadania) {
+                    kalendarz.usunWydarzenie(dzien,i);
+                    System.out.println("Zadanie zostało usunięte.");
+
+                    break;
+                }
+                aktualneZadanie++;
             }
         }
-
-
-        kalendarz.usunWydarzenie(dzien,numerZadania);
-
-
-
     }
 
     private static void spotkaniaDnia(Kalendarz kalendarz){
@@ -189,7 +203,7 @@ public class Zadanie6 {
         String status = scan.nextLine();
         ArrayList<Element> spotkania = kalendarz.pobierzWydarzenia(dzien, (s) -> (
                 s instanceof Zadanie &&
-                        s.dajGodzineZakonczenia().isBefore(LocalTime.parse(godzina).minusMinutes(1))
+                        s.dajGodzineZakonczenia().isBefore(LocalTime.parse(godzina).plusMinutes(1))
                         && ((Zadanie) s).dajStatus().equals(status)));
         wyswietlWszystkie(spotkania);
     }
