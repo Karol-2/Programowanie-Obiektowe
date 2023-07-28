@@ -96,7 +96,7 @@ public class Zadanie7 {
         Scanner scan = new Scanner(System.in);
         System.out.print("Podaj nazwę miejscowości: ");
         String miejscowosc = scan.nextLine();
-        System.out.print("Podaj wielkość powierzchni: ");
+        System.out.print("Podaj minimalną wielkość powierzchni: ");
         Double powierzchnia = scan.nextDouble();
 
         ArrayList<Budynek> listaOfert = oferty.pobierzOferty((o) -> o instanceof Dom &&
@@ -110,16 +110,16 @@ public class Zadanie7 {
         Scanner scan = new Scanner(System.in);
         System.out.print("Podaj nazwę miejscowości: ");
         String miejscowosc = scan.nextLine();
-        System.out.print("Podaj cenę mieszkania: ");
+        System.out.print("Podaj maksymalną cenę mieszkania: ");
         Double cena = scan.nextDouble();
-        System.out.print("Podaj piętro mieszkania: ");
+        System.out.print("Podaj minimalne piętro mieszkania: ");
         int pietro = scan.nextInt();
 
         ArrayList<Budynek> listaOfert = oferty.pobierzOferty((o) -> o instanceof Mieszkanie &&
                 o.dataObowiazywania.isAfter(LocalDate.now().minusDays(1)) &&
                 o.dajMiejscowosc().equals(miejscowosc) &&
                 o.dajCene() <= cena &&
-               ((Mieszkanie) o).dajNumerMieszkania() >= pietro);
+               ((Mieszkanie) o).dajNumerPietra() >= pietro);
 
 
         wyswietlWszystkie(listaOfert);
